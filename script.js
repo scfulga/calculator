@@ -1,3 +1,11 @@
+const allButtons = document.querySelector('.buttons');
+const children = allButtons.children;
+
+for(i = 0; i < children.length; i++){
+    let childNum = children[i].textContent;
+    children[i].setAttribute("id", `${childNum}`);
+}
+
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = '';
