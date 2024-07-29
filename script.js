@@ -1,9 +1,14 @@
 const allButtons = document.querySelector('.buttons');
+const calcScreen = document.querySelector('.screen');
+
 const children = allButtons.children;
 
 for(i = 0; i < children.length; i++){
     let childNum = children[i].textContent;
     children[i].setAttribute("id", `${childNum}`);
+    document.getElementById(`${childNum}`).onclick = function() {
+        calcScreen.textContent += `${childNum}`;
+    }
 }
 
 let firstNumber = 0;
