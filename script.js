@@ -3,17 +3,45 @@ const calcScreen = document.querySelector('.screen');
 
 const children = allButtons.children;
 
+let firstNumber = '';
+let secondNumber = '';
+let operator = '';
+let operators = ['+', '-', '*', '/'];
+
 for(i = 0; i < children.length; i++){
     let childNum = children[i].textContent;
     children[i].setAttribute("id", `${childNum}`);
     document.getElementById(`${childNum}`).onclick = function() {
-        calcScreen.textContent += `${childNum}`;
+        if(!operators.includes(childNum) && childNum !== '=' && childNum !== 'AC'){
+            if(!operator){
+                firstNumber += childNum;
+                calcScreen.textContent = firstNumber;
+            }
+            else{
+                secondNumber += childNum;
+                calcScreen.textContent = secondNumber;
+            }
+        } 
+        
+        if (operators.includes(childNum)){
+            operator = childNum;
+        }
+        if (childNum === '='){
+            let result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
+            calcScreen.textContent = result;
+            firstNumber = result;
+            secondNumber = '';
+            operator = '';    
+        }
+        if(childNum === 'AC'){
+            firstNumber = '';
+            secondNumber = '';
+            operator = '';
+            calcScreen.textContent = '';
+        }
     }
 }
 
-let firstNumber = 0;
-let secondNumber = 0;
-let operator = '';
 
 function operate(a, op, b){
     switch(op){
