@@ -24,7 +24,14 @@ for(i = 0; i < children.length; i++){
         } 
         
         if (operators.includes(childNum)){
+            if(operator && secondNumber){
+                firstNumber = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
+                operator = '';
+                secondNumber = '';
+                calcScreen.textContent = firstNumber;
+            }
             operator = childNum;
+            calcScreen.textContent = firstNumber + ' ' + operator;
         }
         if (childNum === '='){
             let result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
