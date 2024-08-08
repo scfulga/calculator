@@ -1,3 +1,8 @@
+@font-face {
+  font-family: digital;
+  src: url(./assets/digital-7.ttf);
+}
+
 body{
     background-color: #32302f;
     display: flex;
@@ -20,20 +25,22 @@ body{
 
 
 .screen{
+    font-family: digital;
+    font-size: 61px;
+    display: flex;
     flex-grow: 1;
     flex-shrink: 0;
-    display: flex;
     align-items: center;
     justify-content: flex-end;
-    font-size: 3em;
+    min-height: 100px;
     padding: 10px;
     margin: 20px;
     width: 340px;
-    min-height: 100px;
     overflow-wrap: break-word;
     word-break: break-all;
-    background-color: white;
-    border-radius: 5px;
+    background-color: #7c6f64;
+    color: #f9f5d7;
+    border-radius: 20px;
 }
 
 .buttons{
@@ -45,12 +52,13 @@ body{
     height: 500px;
 }
 button{
+    font-family: digital;
     font-size: 32px;
     width: 80px;
     height: 80px;
     cursor: pointer;
     background-color: #3c3836;
-    color: white;               
+    color: #f9f5d7;               
     border: none;
     border-radius: 50%;
     box-shadow: 0 8px #1d2021;
@@ -79,10 +87,7 @@ button:hover {
     background-color: #83a598;
 }
 
-.clear:hover{
-    background-color: #cc241d;
-}
-.backspace:hover{
+.backspace:hover , .clear:hover{
     background-color: #fb4934;
 }
 
