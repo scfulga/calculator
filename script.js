@@ -9,28 +9,28 @@ let operator = '';
 let operators = ['+', '-', '*', '/'];
 
 for (i = 0; i < children.length; i++) {
-    let childNum = children[i].textContent;
-    children[i].setAttribute("id", `${childNum}`);
-    document.getElementById(`${childNum}`).onclick = function() {
+    let button = children[i].textContent;
+    children[i].setAttribute("id", `${button}`);
+    document.getElementById(`${button}`).onclick = function() {
 
-        if (!operators.includes(childNum) && childNum !== '=' && childNum !== 'AC' && childNum !== '⌫') {
-            handleDigitInput(childNum);
+        if (!operators.includes(button) && button !== '=' && button !== 'AC' && button !== '⌫') {
+            handleDigitInput(button);
         }
 
-        if (operators.includes(childNum)) {
-            handleOperators(childNum);
+        if (operators.includes(button)) {
+            handleOperators(button);
         }
-        if (childNum === '=' && firstNumber && secondNumber) {
+        if (button === '=' && firstNumber && secondNumber) {
             handleEqual();
         }
-        handleOperatorsInput(childNum);
+        handleOperatorsInput(button);
         handleDotInput();
 
-        if (childNum === 'AC') {
-            ACBtn();
+        if (button === 'AC') {
+            ACbutton();
         }
-        if (childNum === '⌫') {
-            backspaceBtn();
+        if (button === '⌫') {
+            backspacebutton();
         }
     }
 }
@@ -43,18 +43,18 @@ function updateDot() {
     }
 }
 
-function handleDigitInput(childNum) {
+function handleDigitInput(button) {
     if (!operator) {
-        firstNumber += childNum;
+        firstNumber += button;
         calcScreen.textContent = firstNumber;
     } else {
-        secondNumber += childNum;
+        secondNumber += button;
         calcScreen.textContent = secondNumber;
     }
     updateDot();
 }
 
-function handleOperators(childNum) {
+function handleOperators(button) {
     if (operator && secondNumber) {
         let result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
         limitDecimalsToTwo(result);
@@ -62,7 +62,7 @@ function handleOperators(childNum) {
         secondNumber = '';
         updateDot();
     }
-    operator = childNum;
+    operator = button;
     calcScreen.textContent = firstNumber + ' ' + operator;
     updateDot();
 }
@@ -85,8 +85,8 @@ function limitDecimalsToTwo(result) {
     }
 }
 
-function handleOperatorsInput(childNum) {
-    if (!firstNumber && operators.includes(childNum)) {
+function handleOperatorsInput(button) {
+    if (!firstNumber && operators.includes(button)) {
         operator = '';
         calcScreen.textContent = '';
     }
@@ -102,7 +102,7 @@ function handleDotInput() {
     }
 }
 
-function ACBtn() {
+function ACbutton() {
     firstNumber = '';
     secondNumber = '';
     operator = '';
@@ -110,7 +110,7 @@ function ACBtn() {
     updateDot();
 }
 
-function backspaceBtn() {
+function backspacebutton() {
     if (!operator && firstNumber) {
         firstNumber = firstNumber.slice(0, -1);
         calcScreen.textContent = firstNumber;
