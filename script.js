@@ -25,22 +25,19 @@ for(i = 0; i < children.length; i++){
         } 
 
         if (operators.includes(childNum)){
-            if(operator && operator != '/' && secondNumber){
+            if(operator && secondNumber){
                 let result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
-                calcScreen.textContent = result;
-                firstNumber = result.toString();
+                if(!operator === '/'){
+                    calcScreen.textContent = result;
+                    firstNumber = result.toString();
+                }
+                else{
+                    calcScreen.textContent = result.toFixed(2).toString();
+                    firstNumber = result.toFixed(2).toString();        
+                }
                 operator = '';
                 secondNumber = '';
                 updateDot();
-            }
-            if(operator === '/' && secondNumber){
-                let result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
-                calcScreen.textContent = result.toFixed(2);
-                firstNumber = result.toFixed(2);
-                operator = '';
-                secondNumber = '';
-                updateDot();
-
             }
             operator = childNum;
             calcScreen.textContent = firstNumber + ' ' + operator;
@@ -48,12 +45,19 @@ for(i = 0; i < children.length; i++){
         }
         if (childNum === '=' && firstNumber && secondNumber){
             let result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
-            calcScreen.textContent = result;
-            firstNumber = result.toString();
+            if(!operator === '/'){
+                calcScreen.textContent = result;
+                firstNumber = result.toString();
+            }
+            else{
+                calcScreen.textContent  = result.toFixed(2).toString();
+                firstNumber = result.toFixed(2).toString();
+            } 
             secondNumber = '';
             operator = '';    
             updateDot();
         }
+
         else{
             childNum.disabled;
         }
@@ -93,6 +97,11 @@ for(i = 0; i < children.length; i++){
             }
             updateDot();
         }
+        if (secondNumber.includes('.')){
+            secondNumber = '';
+            document.getElementById('.').disabled = true
+        }
+
     }
 }
     function updateDot(){
