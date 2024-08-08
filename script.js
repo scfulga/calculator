@@ -76,13 +76,8 @@ function handleEqual() {
 }
 
 function limitDecimalsToTwo(result) {
-    if (operator !== '/') {
-        calcScreen.textContent = result.toString();
-        firstNumber = result.toString();
-    } else {
-        calcScreen.textContent = result.toFixed(2).toString();
-        firstNumber = result.toFixed(2).toString();
-    }
+    calcScreen.textContent = parseFloat(result.toFixed(3).toString());
+    firstNumber = parseFloat(result.toFixed(3).toString());
 }
 
 function handleOperatorsInput(button) {
