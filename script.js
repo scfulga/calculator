@@ -13,7 +13,7 @@ for (i = 0; i < children.length; i++) {
     children[i].setAttribute("id", `${button}`);
     document.getElementById(`${button}`).onclick = function() {
 
-        if (!operators.includes(button) && button !== '=' && button !== 'AC' && button !== '⌫') {
+        if (!operators.includes(button) && button !== '=' && button !== 'AC' && button !== '←') {
             handleDigitInput(button);
         }
 
@@ -29,7 +29,7 @@ for (i = 0; i < children.length; i++) {
         if (button === 'AC') {
             ACbutton();
         }
-        if (button === '⌫') {
+        if (button === '←') {
             backspaceButton();
         }
     }
