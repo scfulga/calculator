@@ -30,7 +30,7 @@ for (i = 0; i < children.length; i++) {
             ACbutton();
         }
         if (button === '⌫') {
-            backspacebutton();
+            backspaceButton();
         }
     }
 }
@@ -110,7 +110,7 @@ function ACbutton() {
     updateDot();
 }
 
-function backspacebutton() {
+function backspaceButton() {
     if (!operator && firstNumber) {
         firstNumber = firstNumber.slice(0, -1);
         calcScreen.textContent = firstNumber;
