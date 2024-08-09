@@ -12,7 +12,6 @@ for (i = 0; i < children.length; i++) {
     let button = children[i].textContent;
     children[i].setAttribute("id", `${button}`);
     document.getElementById(`${button}`).onclick = function() {
-
         if (!operators.includes(button) && button !== '=' && button !== 'AC' && button !== '←') {
             handleDigitInput(button);
         }
@@ -31,6 +30,10 @@ for (i = 0; i < children.length; i++) {
         }
         if (button === '←') {
             backspaceButton();
+        }
+        if(firstNumber && operator === '/' && secondNumber === '0'){
+            alert("Can't divide to 0")
+            ACbutton();
         }
     }
 }
