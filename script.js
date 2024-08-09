@@ -35,14 +35,32 @@ for (i = 0; i < children.length; i++) {
             alert("Can't divide to 0")
             ACbutton();
         }
+        
+        handleZero(); 
     }
 }
 
-function updateDot() {
-    if ((!operator && firstNumber.includes('.')) || (operator && secondNumber.includes('.'))) {
-        document.getElementById('.').disabled = true;
+function handleZero() {
+    if (firstnumber === '0' || secondnumber === '0'){
+        document.getelementbyid('0').disabled = true;
     } else {
-        document.getElementById('.').disabled = false;
+        document.getelementbyid('0').disabled = false;
+    }
+
+    if (firstnumber[0] === '0' && firstnumber.length > 1 && !firstnumber.includes('.')){
+        firstnumber = firstnumber.substring(1);
+        calcscreen.textcontent = firstnumber;
+    } else if (secondnumber[0] === '0' && secondnumber.length > 1 && !secondnumber.includes('.')){
+        secondnumber = secondnumber.substring(1);
+        calcscreen.textcontent = secondnumber; 
+    }    
+}
+
+function updatedot() {
+    if ((!operator && firstnumber.includes('.')) || (operator && secondnumber.includes('.'))) {
+        document.getelementbyid('.').disabled = true;
+    } else {
+        document.getelementbyid('.').disabled = false;
     }
 }
 
@@ -60,7 +78,7 @@ function handleDigitInput(button) {
 function handleOperators(button) {
     if (operator && secondNumber) {
         let result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
-        limitDecimalsToTwo(result);
+        limitDecimalsToThree(result);
         operator = '';
         secondNumber = '';
         updateDot();
@@ -72,15 +90,19 @@ function handleOperators(button) {
 
 function handleEqual() {
     let result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
-    limitDecimalsToTwo(result);
+    limitDecimalsToThree(result);
     secondNumber = '';
     operator = '';
     updateDot();
 }
 
-function limitDecimalsToTwo(result) {
-    calcScreen.textContent = parseFloat(result.toFixed(3).toString());
-    firstNumber = parseFloat(result.toFixed(3).toString());
+function limitDecimalsToThree(result) {
+    if(result % 1 === 0){
+        calcScreen.textContent = result.toString();
+    } else{
+        calcScreen.textContent = parseFloat(result.toFixed(3));
+    }
+    firstNumber = calcScreen.textContent;
 }
 
 function handleOperatorsInput(button) {
@@ -106,6 +128,7 @@ function ACbutton() {
     operator = '';
     calcScreen.textContent = '';
     updateDot();
+    document.getElementById('0').disabled = false;
 }
 
 function backspaceButton() {
@@ -134,6 +157,7 @@ function operate(a, op, b) {
             return divide(a, b);
     }
 }
+
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
