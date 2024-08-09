@@ -35,32 +35,32 @@ for (i = 0; i < children.length; i++) {
             alert("Can't divide to 0")
             ACbutton();
         }
-        
-        handleZero(); 
+        handleZero();
+    
     }
 }
 
 function handleZero() {
-    if (firstnumber === '0' || secondnumber === '0'){
-        document.getelementbyid('0').disabled = true;
+    if (firstNumber === '0' || secondNumber === '0'){
+        document.getElementById('0').disabled = true;
     } else {
-        document.getelementbyid('0').disabled = false;
+        document.getElementById('0').disabled = false;
     }
 
-    if (firstnumber[0] === '0' && firstnumber.length > 1 && !firstnumber.includes('.')){
-        firstnumber = firstnumber.substring(1);
-        calcscreen.textcontent = firstnumber;
-    } else if (secondnumber[0] === '0' && secondnumber.length > 1 && !secondnumber.includes('.')){
-        secondnumber = secondnumber.substring(1);
-        calcscreen.textcontent = secondnumber; 
+    if (firstNumber[0] === '0' && firstNumber.length > 1 && !firstNumber.includes('.')){
+        firstNumber = firstNumber.substring(1);
+        calcScreen.textContent = firstNumber;
+    } else if (secondNumber[0] === '0' && secondNumber.length > 1 && !secondNumber.includes('.')){
+        secondNumber = secondNumber.substring(1);
+        calcScreen.textContent = secondNumber; 
     }    
 }
 
-function updatedot() {
-    if ((!operator && firstnumber.includes('.')) || (operator && secondnumber.includes('.'))) {
-        document.getelementbyid('.').disabled = true;
+function updateDot() {
+    if ((!operator && firstNumber.includes('.')) || (operator && secondNumber.includes('.'))) {
+        document.getElementById('.').disabled = true;
     } else {
-        document.getelementbyid('.').disabled = false;
+        document.getElementById('.').disabled = false;
     }
 }
 
