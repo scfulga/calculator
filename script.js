@@ -12,7 +12,7 @@ for (i = 0; i < children.length; i++) {
     let button = children[i].textContent;
     children[i].setAttribute("id", `${button}`);
     document.getElementById(`${button}`).onclick = function() {
-        if (!operators.includes(button) && button !== '=' && button !== 'AC' && button !== '←') {
+        if (!operators.includes(button) && button !== '=' && button !== 'AC' && button !== '←' && button !== '±') {
             handleDigitInput(button);
         }
 
@@ -36,7 +36,38 @@ for (i = 0; i < children.length; i++) {
             ACbutton();
         }
         handleZero();
-    
+        handleNegOrPosBtn(button); 
+    }
+}
+
+function handleNegOrPosBtn(button){
+    if (button === '±'){
+        if (!operator){
+            firstNumber = toggleNegOrPosBtn(firstNumber);
+            calcScreen.textContent = firstNumber + ' ' + operator;
+        } else {
+            secondNumber  = toggleNegOrPosBtn(secondNumber);
+            calcScreen.textContent = secondNumber;
+        }
+        if(firstNumber === '-'){
+            firstNumber = firstNumber.substring(1);
+            calcScreen.textContent = firstNumber;
+        } else if(secondNumber === '-'){
+            secondNumber = secondNumber.substring(1);
+            calcScreen.textContent = secondNumber;
+        }
+        if (firstNumber && operator && !secondNumber){
+            firstNumber = toggleNegOrPosBtn(firstNumber);
+            calcScreen.textContent = firstNumber + ' ' + operator;
+        }
+    }
+}
+
+function toggleNegOrPosBtn(num) {
+    if(num[0] !== '-'){
+        return num = '-' + num;
+    } else {
+        return num = num.substring(1);
     }
 }
 
@@ -53,7 +84,16 @@ function handleZero() {
     } else if (secondNumber[0] === '0' && secondNumber.length > 1 && !secondNumber.includes('.')){
         secondNumber = secondNumber.substring(1);
         calcScreen.textContent = secondNumber; 
-    }    
+    }
+
+    if (firstNumber[1] === '0' && firstNumber[0] === '-' && firstNumber.length > 2 && !firstNumber.includes('.')){
+        firstNumber = firstNumber.slice(0, 1) + firstNumber.slice(2);
+        calcScreen.textContent = firstNumber;       
+    } else if (secondNumber[1] === '0' && secondNumber[0] === '-' && secondNumber.length > 2 && !secondNumber.includes('.')){
+        secondNumber = secondNumber.slice(0, 1) + secondNumber.slice(2);
+        calcScreen.textContent = secondNumber
+    }
+    
 }
 
 function updateDot() {
