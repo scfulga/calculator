@@ -8,6 +8,8 @@ let secondNumber = '';
 let operator = '';
 let operators = ['+', '-', '*', '/'];
 
+// welcome to my if hell
+
 for (i = 0; i < children.length; i++) {
     let button = children[i].textContent;
     children[i].setAttribute("id", `${button}`);
@@ -182,6 +184,13 @@ function backspaceButton() {
         operator = operator.slice(0, -1);
         calcScreen.textContent = firstNumber;
     }
+    if (firstNumber === '-'){
+        firstNumber = '';
+        calcScreen.textContent = '';
+    } else if (secondNumber === '-'){
+        secondNumber = '';
+        calcScreen.textContent = '';
+    } 
     updateDot();
 }
 
